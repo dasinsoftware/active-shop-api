@@ -1,7 +1,7 @@
 package za.co.momentum.activeshopapi.product;
 
 import org.springframework.stereotype.Component;
-import za.co.momentum.activeshopapi.ResourceNotFoundException;
+import za.co.momentum.activeshopapi.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Set;

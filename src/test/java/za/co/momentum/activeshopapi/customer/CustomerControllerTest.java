@@ -10,9 +10,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import za.co.momentum.activeshopapi.GeneralControllerAdvice;
-import za.co.momentum.activeshopapi.InsufficientPointsException;
-import za.co.momentum.activeshopapi.ResourceNotFoundException;
+import za.co.momentum.activeshopapi.exceptions.GeneralControllerAdvice;
+import za.co.momentum.activeshopapi.exceptions.InsufficientPointsException;
+import za.co.momentum.activeshopapi.exceptions.ResourceNotFoundException;
 
 import java.util.Set;
 

@@ -1,5 +1,6 @@
 package za.co.momentum.activeshopapi.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,7 @@ import za.co.momentum.activeshopapi.product.Product;
 import za.co.momentum.activeshopapi.product.ProductRepository;
 
 import java.util.Set;
-
+@Slf4j
 @Configuration
 public class StartupConfig {
     @Bean
@@ -29,7 +30,9 @@ public class StartupConfig {
                         Customer.builder().id(3L).name("Kumaran").points(150L).build(),
                         Customer.builder().id(4L).name("Justin").points(340L).build()
                 ));
-            }catch(Exception ignored){}
+            }catch(Exception e){
+                log.debug(e.getMessage());
+            }
         };
     }
 }

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import za.co.momentum.activeshopapi.InsufficientPointsException;
-import za.co.momentum.activeshopapi.ResourceNotFoundException;
+import za.co.momentum.activeshopapi.exceptions.InsufficientPointsException;
+import za.co.momentum.activeshopapi.exceptions.ResourceNotFoundException;
 import za.co.momentum.activeshopapi.product.Product;
 import za.co.momentum.activeshopapi.product.ProductService;
 
@@ -31,9 +31,9 @@ public class CustomerServiceTest {
     @Test
     void given_Nonexistent_Customer_throwException(){
         when(customerRepository.findById(800L)).thenThrow(new ResourceNotFoundException("Customer"));
-        Assertions.assertThrows(ResourceNotFoundException.class,() -> {
-            customerService.addToCart(800L, PurchaseRequest.builder().build());
-        });
+        Assertions.assertThrows(ResourceNotFoundException.class,() ->
+            customerService.addToCart(800L, PurchaseRequest.builder().build())
+        );
     }
 
     @Test
@@ -47,15 +47,28 @@ public class CustomerServiceTest {
                                            .code(1L)
                                            .pointsCost(25L)
                                            .build()));
-        Assertions.assertThrows(InsufficientPointsException.class,() -> {
-            customerService.addToCart(3L, PurchaseRequest.builder()
-                                                    .productIds(Set.of(1L))
-                                                    .build());
-        });
+        Assertions.assertThrows(InsufficientPointsException.class,() ->
+                customerService.addToCart(3L, PurchaseRequest.builder()
+                                                .productIds(Set.of(1L))
+                                                .build()));
     }
 
     @Test
-    void given_ (){
+    void given_Nonexistent_Product_throwException(){
+        when(customerRepository.findById(3L))
+                .thenReturn(Optional.of(Customer.builder()
+                        .points(5L)
+                        .build()));
+        when(productService.getProductsByIds(Set.of(1000L)))
+                .thenThrow(new ResourceNotFoundException("Product"));
+        Assertions.assertThrows(ResourceNotFoundException.class,() ->
+                customerService.addToCart(3L, PurchaseRequest.builder()
+                        .productIds(Set.of(1000L))
+                        .build()));
+    }
+
+    @Test
+    void given_Customer_PurchaseRequest_Subtractpoints_From_Balance(){
         when(customerRepository.findById(3L))
                 .thenReturn(Optional.of(Customer.builder()
                         .points(500L)

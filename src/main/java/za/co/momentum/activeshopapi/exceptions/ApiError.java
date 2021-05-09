@@ -1,4 +1,4 @@
-package za.co.momentum.activeshopapi;
+package za.co.momentum.activeshopapi.exceptions;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

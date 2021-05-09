@@ -1,8 +1,8 @@
 package za.co.momentum.activeshopapi.customer;
 
 import org.springframework.stereotype.Component;
-import za.co.momentum.activeshopapi.ResourceNotFoundException;
-import za.co.momentum.activeshopapi.InsufficientPointsException;
+import za.co.momentum.activeshopapi.exceptions.ResourceNotFoundException;
+import za.co.momentum.activeshopapi.exceptions.InsufficientPointsException;
 import za.co.momentum.activeshopapi.product.Product;
 import za.co.momentum.activeshopapi.product.ProductService;
 

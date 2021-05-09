@@ -19,9 +19,9 @@ private final CustomerService customerService;
     }
 
     @PostMapping("/{id}/cart")
-    public void addToCart(@PathVariable("id") Long customerId,
+    public Customer addToCart(@PathVariable("id") Long customerId,
                           @Valid @RequestBody PurchaseRequest purchaseRequest) {
-        customerService.addToCart(customerId, purchaseRequest);
+        return customerService.addToCart(customerId, purchaseRequest);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

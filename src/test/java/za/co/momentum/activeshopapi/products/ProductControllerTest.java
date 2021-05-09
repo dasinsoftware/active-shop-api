@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import za.co.momentum.activeshopapi.GeneralControllerAdvice;
+import za.co.momentum.activeshopapi.exceptions.GeneralControllerAdvice;
 import za.co.momentum.activeshopapi.product.Product;
 import za.co.momentum.activeshopapi.product.ProductController;
 import za.co.momentum.activeshopapi.product.ProductService;
