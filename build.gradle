@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.10.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.palantir.docker' version '0.25.0'
 	id 'java'
 }
 
@@ -16,6 +17,32 @@ configurations {
 
 repositories {
 	mavenCentral()
+}
+
+ext {
+	versionBuild =  '1.0.0'
+}
+
+bootJar {
+	archiveBaseName = 'active-shop-api'
+	archiveVersion =  versionBuild
+	manifest {
+		attributes('Implementation-Title':   archiveBaseName.get(), 'Implementation-Version': archiveVersion.get())
+	}
+}
+
+task unpack(type: Copy) {
+	dependsOn bootJar
+	from(zipTree(tasks.bootJar.outputs.files.singleFile))
+	into("build/dependency")
+}
+
+docker {
+	dependsOn assemble
+	tags "${bootJar.archiveVersion.get()}", 'latest'
+	name "docker.momentum.co.za/${project.group}/${bootJar.archiveBaseName.get()}:${bootJar.archiveVersion.get()}"
+	dockerfile file('src/main/docker/Dockerfile')
+	copySpec.from(tasks.unpack.outputs).into("build/dependency")
 }
 
 dependencies {
