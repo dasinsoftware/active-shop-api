@@ -37,7 +37,7 @@ docker run -p 8080:8080 docker.momentum.co.za/za.co.momentum/active-shop-api:1.0
   
 Note : For the docker option - You also need Docker, which only runs on 64-bit machines. See https://docs.docker.com/installation/#installation for details on setting Docker up for your machine. 
 
-##Once Api is running, the ffg. links will be available:
+## Once Api is running, the ffg. links will be available:
 
 - To view Swagger docs click  [here](http://localhost:8080/swagger-ui.html)
 
